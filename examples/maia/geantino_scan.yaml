@@ -1,0 +1,11 @@
+generator: geant4
+geometry:
+  gdml: gdml/MAIA_v0.gdml
+beam:
+  particle: geantino
+  position: "0 0 0 mm"
+  direction: "0 0 0"
+run:
+  events: 10000
+  output: output.root
+  seed: 20260926 #date when written
