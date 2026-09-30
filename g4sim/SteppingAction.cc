@@ -120,6 +120,16 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
     // -----------------------------
     RecordExitCrossing(step);
 
+    const auto* prePoint = step->GetPreStepPoint();
+    const G4Material* mat = prePoint->GetMaterial();
+    double nX0 = 0.0, nLambda = 0.0;
+    if (mat){
+      const double X0 = mat->GetRadlen();
+      const double lam = mat->GetNuclearInterLength();
+      if (X0 > 0.0 && std::isfinite(X0)) nX0 = step->GetStepLength()/X0;
+      if (lam > 0.0 && std::isfinite(lam)) nLambda = step->GetStepLength()/lam;
+    }
+
     // -----------------------------
     // Record this step (all tracks). The per-track table is built from these.
     // -----------------------------
@@ -137,7 +147,8 @@ void SteppingAction::UserSteppingAction(const G4Step* step)
         stepProcess ? stepProcess->GetProcessName() : "None",
         creatorProcess ? creatorProcess->GetProcessName() : "Primary",
         track->GetVertexPosition(),
-        track->GetVertexKineticEnergy());
+        track->GetVertexKineticEnergy(),
+        nX0, nLambda);
 }
 
 

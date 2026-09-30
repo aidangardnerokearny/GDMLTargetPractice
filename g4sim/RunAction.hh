@@ -67,6 +67,7 @@ public:
     std::vector<double> step_x, step_y, step_z;
     std::vector<double> step_kinE, step_edep, step_length, step_time;
     std::vector<std::string> step_process;
+    std::vector<double> step_nX0, step_nLambda;
 
     // --- Neutrino-interaction block (booked only in neutrino mode) ---
     bool nu_isCC = false, nu_isNC = false;

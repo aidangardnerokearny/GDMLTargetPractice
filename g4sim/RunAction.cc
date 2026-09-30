@@ -114,6 +114,8 @@ void RunAction::BeginOfRunAction(const G4Run* run) {
         fTree->Branch("step_length", &step_length);
         fTree->Branch("step_time", &step_time);
         fTree->Branch("step_process", &step_process);
+        fTree->Branch("step_nX0", &step_nX0);
+        fTree->Branch("step_nLambda", &step_nLambda);
 
         // --- Neutrino-interaction block (only when enabled) ---
         if (fNeutrinoBranches) {
@@ -182,6 +184,8 @@ void RunAction::FillEvent(EventAction* evt)
         step_length.push_back(s.stepLength);
         step_time.push_back(s.globalTime);
         step_process.push_back(s.processName);
+        step_nX0.push_back(s.nX0);
+        step_nLambda.push_back(s.nLambda);
     }
 }
 

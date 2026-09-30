@@ -29,6 +29,8 @@ struct StepInfo {
     std::string creatorProcess;
     G4ThreeVector birthPos;   // track vertex position
     double birthKE;           // track vertex kinetic energy
+    double nX0 = 0.0;
+    double nLambda = 0.0;
 };
 
 // Per-track summary, accumulated over the track's steps (see AddStepInfo).
@@ -58,10 +60,15 @@ public:
                      double edep, double globalTime, double stepLength,
                      const std::string& processName,
                      const std::string& creatorProcess,
-                     const G4ThreeVector& birthPos, double birthKE);
+                     const G4ThreeVector& birthPos, double birthKE,
+                     double nX0=0.0, double nLambda=0.0);
 
     void AddEdep(double edep) { totalEdep_ += edep; }
     void IncrementStep() { nSteps_++; }
+    
+    // --- Total Rad and Interaction Lengths ---
+    double PrimaryNX0_ = 0.0;
+    double PrimaryNLambda0_ = 0.0;
 
     // --- Per-event collections ---
     std::vector<StepInfo> steps;

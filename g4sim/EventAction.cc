@@ -57,7 +57,9 @@ void EventAction::AddStepInfo(int trackID, int parentID, int PDG,
                               double edep, double globalTime, double stepLength,
                               const std::string& processName,
                               const std::string& creatorProcess,
-                              const G4ThreeVector& birthPos, double birthKE)
+                              const G4ThreeVector& birthPos, double birthKE,
+                              double nX0, double nLambda)
+                              
 {
     StepInfo s;
     s.trackID = trackID;
@@ -74,6 +76,8 @@ void EventAction::AddStepInfo(int trackID, int parentID, int PDG,
     s.creatorProcess = creatorProcess;
     s.birthPos = birthPos;
     s.birthKE = birthKE;
+    s.nX0 = nX0;
+    s.nLambda = nLambda;
     steps.push_back(s);
 
     // Fold into the per-track summary (map iterates sorted by trackID).
